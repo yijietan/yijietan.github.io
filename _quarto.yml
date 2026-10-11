@@ -49,3 +49,4 @@ format:
     canonical-url: true   # matches the canonical links set on the Medium copies
     include-in-header:
       - _includes/analytics.html
+      - _includes/verification.html
