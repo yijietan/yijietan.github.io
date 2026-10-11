@@ -3,6 +3,8 @@ title: "Interactive density map of Singapore's bus services (March 2026)"
 subtitle: "Every road with a bus on it, coloured by how many services run along it. Zoom in, tap a road, see which buses use it."
 description: "Interactive map of Singapore's bus network: zoom into any road and see how many bus services run along it, and which ones. Built from BusRouter SG route data."
 date: 2026-03-02
+aliases:
+  - /posts/bus-density-map/   # old URL, redirects here
 date-modified: 2026-10-11
 categories: [buses, maps]
 image: static-density-map.jpg
@@ -143,6 +145,6 @@ The static map was processed and plotted in MATLAB, with the routes interpolated
 
 ## What's next?
 
-I'd like to piggyback on the analysis that I had done for my previous two articles regarding [bus passenger volumes](/posts/busiest-bus-trips/) and [crowdedness levels](/posts/most-crowded-bus-routes/), and to integrate those data into this map. If that works out well, perhaps a time-lapse could be done, making the visualisation of Singapore's bus circulatory system more vivid and dynamic.
+I'd like to piggyback on the analysis that I had done for my previous two articles regarding [bus passenger volumes](/posts/2025-04-01_busiest-bus-trips/) and [crowdedness levels](/posts/2025-06-14_most-crowded-bus-routes/), and to integrate those data into this map. If that works out well, perhaps a time-lapse could be done, making the visualisation of Singapore's bus circulatory system more vivid and dynamic.
 
 That's all for now!

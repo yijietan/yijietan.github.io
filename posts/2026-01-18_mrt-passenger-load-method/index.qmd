@@ -3,6 +3,8 @@ title: "Appendix: how the MRT passenger loads were estimated"
 subtitle: "Accompanying write-up that goes into detail on the data analysis for Singapore's rail network passenger data."
 description: "How LTA DataMall origin-destination data was turned into MRT segment loads and interchange transfers, using travel times, transfer times and Dijkstra's algorithm."
 date: 2026-01-18
+aliases:
+  - /posts/mrt-passenger-load-method/   # old URL, redirects here
 date-modified: 2026-01-22
 categories: [trains, method]
 image: mrt-network-graph.png
@@ -20,7 +22,7 @@ image: mrt-network-graph.png
 
 *Update @ 22 Jan 2026: [u/ylyn](https://www.reddit.com/r/singapore/comments/1qg5lkw/comment/o0azv7q/) pointed out a crucial flaw in my original method when assigning passenger loads to segments, which I've corrected in the relevant sections.*
 
-This article is the accompanying appendix of the main article! If you haven't already read that article, you may do so first (or scan through it, or read the TL;DR) before coming here for some context: [Deep dive of Singapore's rail network passenger loads](/posts/busiest-mrt-stations/).
+This article is the accompanying appendix of the main article! If you haven't already read that article, you may do so first (or scan through it, or read the TL;DR) before coming here for some context: [Deep dive of Singapore's rail network passenger loads](/posts/2026-01-18_busiest-mrt-stations/).
 
 We use the origin-destination (OD) passenger volume data obtained from [LTA DataMall](https://datamall.lta.gov.sg/), which gives the number of trips between MRT stop pairs, where they would tap in and out of the fare gantry. The data is given in terms of the number of trips completed in each hour of the day, with the days separated into two types of categories: weekdays, and weekends/public holidays.
 
@@ -139,4 +141,4 @@ We can use [Dijkstra's algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_alg
 
 Having all of the possible journeys that one can make between each possible station pair in the MRT/LRT network, we can systematically break down the OD passenger volume data from LTA DataMall.
 
-[Click here to go back to the analysis in the main article!](/posts/busiest-mrt-stations/)
+[Click here to go back to the analysis in the main article!](/posts/2026-01-18_busiest-mrt-stations/)

@@ -3,11 +3,13 @@ title: "Singapore's most crowded bus routes (March 2025 data)"
 subtitle: "Estimating how full each bus service gets, by route and time of day"
 description: "Singapore's most crowded bus routes and services, estimated from LTA DataMall data: average load per bus by route, peak and off-peak, weekday and weekend."
 date: 2025-06-14
+aliases:
+  - /posts/most-crowded-bus-routes/   # old URL, redirects here
 categories: [buses]
 image: knight-bus.jpeg
 ---
 
-*Originally published on Medium as "[Singapore's Most Crowded Bus Routes: A deep dive into public bus data (Part 2)](https://medium.com/@simpletan/singapores-most-crowded-bus-routes-a-deep-dive-into-public-bus-data-part-2-a1cd6686b53e)" on 14 June 2025. This is Part 2; [Part 1](/posts/busiest-bus-trips/) looks at the busiest stop-to-stop trips.*
+*Originally published on Medium as "[Singapore's Most Crowded Bus Routes: A deep dive into public bus data (Part 2)](https://medium.com/@simpletan/singapores-most-crowded-bus-routes-a-deep-dive-into-public-bus-data-part-2-a1cd6686b53e)" on 14 June 2025. This is Part 2; [Part 1](/posts/2025-04-01_busiest-bus-trips/) looks at the busiest stop-to-stop trips.*
 
 ::: tldr
 [TL;DR]{.tldr-title}
@@ -20,7 +22,7 @@ image: knight-bus.jpeg
 - City Direct and Express buses reach 40–50 passengers in the weekday AM peak (657, 868E, 674, 663), but regular Express routes otherwise don't show high loads.
 :::
 
-This is a continuation of the [article that I wrote](/posts/busiest-bus-trips/) about the analysis of Singapore's public bus passenger data. In that article, I had mentioned that I would have liked to estimate the passenger load levels on the different route segments. Comments on the [Reddit thread](https://www.reddit.com/r/singapore/comments/1jrd1ve/a_deep_dive_into_singapores_public_bus_systems/) that I posted in r/singapore seemed to be receptive to the idea of a follow-up article too.
+This is a continuation of the [article that I wrote](/posts/2025-04-01_busiest-bus-trips/) about the analysis of Singapore's public bus passenger data. In that article, I had mentioned that I would have liked to estimate the passenger load levels on the different route segments. Comments on the [Reddit thread](https://www.reddit.com/r/singapore/comments/1jrd1ve/a_deep_dive_into_singapores_public_bus_systems/) that I posted in r/singapore seemed to be receptive to the idea of a follow-up article too.
 
 Well, here we are! On top of estimating the passenger loads on the route segments, I will also be expanding on that to estimate and visualize the passenger loads on entire bus routes, at different times of the day.
 

@@ -3,6 +3,8 @@ title: "Singapore's busiest MRT stations and line segments (Oct 2025 data)"
 subtitle: "An analysis of passenger loads and patterns in Singapore's MRT and LRT network."
 description: "Which MRT stations, interchanges and line segments in Singapore are busiest at peak hours? An analysis of LTA DataMall passenger data for October 2025."
 date: 2026-01-18
+aliases:
+  - /posts/busiest-mrt-stations/   # old URL, redirects here
 date-modified: 2026-01-22
 categories: [trains]
 image: raffles-place-exits.jpg
@@ -31,11 +33,11 @@ Here's a condensed summary of all the stats for peak periods on weekdays in Octo
 
 *Update \@ 22 Jan 2026: [u/ylyn](https://www.reddit.com/r/singapore/comments/1qg5lkw/comment/o0azv7q/) pointed out a crucial flaw in my original method when assigning passenger loads to segments. I have corrected the error in my re-computations, resulting in corrected tables, naturally leading to different analysis and conclusions for most of the article, less the inflow/outflow and non-interchange sections.*
 
-I'm back with another deep dive of Singapore's public transport! You can take a look at my previous articles about buses [here](/posts/busiest-bus-trips/) and [here](/posts/most-crowded-bus-routes/).
+I'm back with another deep dive of Singapore's public transport! You can take a look at my previous articles about buses [here](/posts/2025-04-01_busiest-bus-trips/) and [here](/posts/2025-06-14_most-crowded-bus-routes/).
 
 This time, we will be taking a look at the passenger loads of the rail network — both MRT and LRT. However, I think it is quite intuitive that the MRT loads will generally outweigh the LRT loads, simply because of the capacity of the trains, as well as the number of stations and coverage that they offer.
 
-Like the previous articles, I've taken the data mainly from [LTA DataMall](https://datamall.lta.gov.sg/content/datamall/en.html) (and some other sources) and did some data analysis and processing to get some interesting metrics that we can really look into. For a more detailed write-up on the data processing methodologies, assumptions, and the metrics that I ended up with, look at the accompanying write-up here: [Appendix — Deep dive of Singapore's rail network passenger loads](/posts/mrt-passenger-load-method/).
+Like the previous articles, I've taken the data mainly from [LTA DataMall](https://datamall.lta.gov.sg/content/datamall/en.html) (and some other sources) and did some data analysis and processing to get some interesting metrics that we can really look into. For a more detailed write-up on the data processing methodologies, assumptions, and the metrics that I ended up with, look at the accompanying write-up here: [Appendix — Deep dive of Singapore's rail network passenger loads](/posts/2026-01-18_mrt-passenger-load-method/).
 
 We'll be looking at the statistics from October 2025, one of the months without any major disruptions affecting day-to-day commuter patterns. We'll also be mainly looking at AM and PM peak periods on weekdays for this article, following the LTA definition of 6.30am to 8.30am for AM peak, and 5pm to 7pm for PM peak. In the tables, the hour of day is the hour the count starts in, so 8am means 8:00 to 8:59am.
 
@@ -67,7 +69,7 @@ Last but not least, there are the LRT/MRT lines which I would call the feeder li
 
 ## Weekday AM and PM peak transfers at MRT interchanges
 
-We now look at the transfer figures at the MRT interchanges. I would like to highlight that these numbers aren't actually recorded and made publicly available in the LTA DataMall datasets, so these are just approximations and estimations. Again, if you'd like to go into more detail on how I went about these estimations, please do read the [accompanying appendix article](/posts/mrt-passenger-load-method/)!
+We now look at the transfer figures at the MRT interchanges. I would like to highlight that these numbers aren't actually recorded and made publicly available in the LTA DataMall datasets, so these are just approximations and estimations. Again, if you'd like to go into more detail on how I went about these estimations, please do read the [accompanying appendix article](/posts/2026-01-18_mrt-passenger-load-method/)!
 
 ### Weekday AM peak transfers
 

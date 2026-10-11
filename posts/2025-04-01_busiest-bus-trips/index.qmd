@@ -3,6 +3,8 @@ title: "Singapore's busiest bus trips between stops (Feb 2025 data)"
 subtitle: "Which bus stop pairs carry the most passengers, and what that says about each estate"
 description: "The busiest bus trips between stops in Singapore, ranked with LTA DataMall passenger volume data, Feb 2025: checkpoints, schools, MRT stations and interchanges."
 date: 2025-04-01
+aliases:
+  - /posts/busiest-bus-trips/   # old URL, redirects here
 categories: [buses]
 image: jurong-gateway-bus-stop.jpg
 ---
@@ -19,7 +21,7 @@ image: jurong-gateway-bus-stop.jpg
 - Less so for workers, but buses are still important for industrial areas, such as Sembawang Shipyard and Jurong's industrial estate.
 :::
 
-*\[Update: Check out [part 2](/posts/most-crowded-bus-routes/) where I look at the crowdedness of bus services and route segments!\]*
+*\[Update: Check out [part 2](/posts/2025-06-14_most-crowded-bus-routes/) where I look at the crowdedness of bus services and route segments!\]*
 
 ## Objective
 
