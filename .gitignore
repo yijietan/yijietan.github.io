@@ -7,4 +7,4 @@ Thumbs.db
 **/*.quarto_ipynb
 
 # Private notes (setup steps, local paths). Not part of the published site.
-SITE_PLAN.md
+SITE_DETAILS.md

@@ -3,7 +3,7 @@ project:
   output-dir: _site
   render:
     - "**/*.qmd"
-    - "!SITE_PLAN.md"   # private notes, never published
+    - "!SITE_DETAILS.md"   # private notes, never published
   resources:
     - "posts/*/data/*"
     - "posts/*/*.py"
