@@ -1,0 +1,12 @@
+# Applies to every post in posts/.
+author: "Tan Yi Jie"
+title-block-banner: false
+toc: true
+toc-location: right
+toc-title: "On this page"
+filters:
+  - ../filters/auto-table-widths.lua
+  - ../filters/subscribe.lua
+# Likes and comments (giscus, GitHub Discussions) are added at the end of every
+# post by filters/subscribe.lua from _includes/comments.html.
+post-comments: true

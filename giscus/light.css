@@ -1,0 +1,5 @@
+/* giscus theme for this site: giscus's standard light theme, minus its "N reactions"
+   heading. The page shows its own "N likes" count instead (see _includes/comments.html). */
+@import url("https://giscus.app/themes/light.css");
+
+.gsc-reactions-count { display: none; }

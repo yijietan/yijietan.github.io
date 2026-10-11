@@ -1,0 +1,32 @@
+---
+title: "About"
+description: "Who writes this site and where the data comes from."
+filters:
+  - filters/subscribe.lua
+---
+
+I'm Tan Yi Jie. I write data deep dives on Singapore's public transport: which bus routes are most crowded, which MRT stations and line segments are busiest, and what the patterns say about how the city moves.
+
+## Data
+
+Most analyses use open data from [LTA DataMall](https://datamall.lta.gov.sg/) (passenger volume by origin and destination, bus routes, train stations), plus route shapes from [BusRouter SG](https://busrouter.sg/) and map boundaries from [data.gov.sg](https://data.gov.sg/). Each post explains its method and assumptions. All figures are estimates derived from that data, not official LTA statistics.
+
+## Elsewhere
+
+Earlier versions of these articles were first published on [Medium](https://medium.com/@simpletan). This site is now their main home.
+
+Found a mistake or have an idea for the next analysis? Leave a comment under any post.
+
+## About this site {#about-this-site}
+
+This site is built and run with *mostly* free, open-source tools:
+
+- **Built with [Quarto](https://quarto.org/)**, an open-source publishing system for data writing, and **hosted on [GitHub Pages](https://pages.github.com/)**.
+- **Likes and comments** use [giscus](https://giscus.app/). You need a GitHub account to like or comment.
+- **Subscriptions and email updates** are sent with [Buttondown](https://buttondown.com/).
+- **Visitor statistics** come from [GoatCounter](https://www.goatcounter.com/)
+- **The interactive map** uses [Leaflet](https://leafletjs.com/) with base maps from [OneMap](https://www.onemap.gov.sg/) by the Singapore Land Authority.
+- **Data** comes from [LTA DataMall](https://datamall.lta.gov.sg/), [BusRouter SG](https://busrouter.sg/) and [data.gov.sg](https://data.gov.sg/), as credited in each post.
+- **The website itself** (its design, code and setup) was built with the help of [Claude](https://claude.ai). Claude also helped move the articles over from Medium, doing mainly tasks like typing out tables that were previously images, fixing typos, and writing the TL;DRs and page descriptions. The analysis, data and writing are my own.
+
+The site's source is public at [github.com/yijietan/yijietan.github.io](https://github.com/yijietan/yijietan.github.io).

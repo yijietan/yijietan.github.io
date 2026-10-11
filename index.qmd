@@ -1,0 +1,26 @@
+---
+title: "Singapore transport, by the numbers"
+description: "Data deep dives into Singapore's buses and trains: crowded routes, busy stations, and maps."
+listing:
+  id: posts
+  contents: posts
+  sort: "date desc"
+  type: default
+  categories: false
+  sort-ui: false
+  filter-ui: false
+  fields: [image, date, title, description]
+  image-height: 140px
+  image-align: right
+  feed:
+    type: full
+page-layout: article
+title-block-banner: false
+filters:
+  - filters/subscribe.lua
+---
+
+I dig into open data from LTA DataMall and other sources to find out where Singapore's buses and trains are busiest, and why.
+
+::: {#posts}
+:::

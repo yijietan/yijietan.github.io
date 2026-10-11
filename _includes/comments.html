@@ -1,0 +1,67 @@
+<!--
+  Likes and comments via giscus (GitHub Discussions, "Comments" category, one thread per post URL).
+  giscus's own "N reactions" heading is hidden by the custom themes in /giscus/, and the
+  count is shown here as "N likes", using the discussion metadata giscus sends to the page.
+-->
+<section class="post-likes" aria-label="Likes and comments">
+  <p class="reactions-prompt">Enjoyed this article? Leave a like!</p>
+  <p class="likes-count" aria-live="polite"><span id="likes-count">0</span> <span id="likes-word">likes</span></p>
+  <div class="giscus"></div>
+</section>
+<script>
+  (function () {
+    function isDark() { return document.body.classList.contains("quarto-dark"); }
+    // On the live site, use the custom themes in /giscus/ (they hide giscus's own count).
+    // In local preview, browsers block giscus from loading files from this computer,
+    // so fall back to giscus's built-in themes there.
+    var local = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+    function themeUrl() {
+      var mode = isDark() ? "dark" : "light";
+      return local ? mode : location.origin + "/giscus/" + mode + ".css";
+    }
+
+    function start() {
+      var s = document.createElement("script");
+      s.src = "https://giscus.app/client.js";
+      s.async = true;
+      s.crossOrigin = "anonymous";
+      var cfg = {
+        "repo": "yijietan/yijietan.github.io",
+        "repo-id": "R_kgDOVEamVw",
+        "category": "Comments",
+        "category-id": "DIC_kwDOVEamV84DHif7",
+        "mapping": "pathname",
+        "strict": "0",
+        "reactions-enabled": "1",
+        "emit-metadata": "1",
+        "input-position": "bottom",
+        "lang": "en",
+        "loading": "lazy",
+        "theme": themeUrl()
+      };
+      for (var k in cfg) s.setAttribute("data-" + k, cfg[k]);
+      document.querySelector(".post-likes").appendChild(s);
+
+      // Show giscus's reaction total as "N like(s)".
+      window.addEventListener("message", function (e) {
+        if (e.origin !== "https://giscus.app" || !e.data || !e.data.giscus) return;
+        var d = e.data.giscus.discussion;
+        if (!d || typeof d.reactionCount !== "number") return;
+        document.getElementById("likes-count").textContent = d.reactionCount;
+        document.getElementById("likes-word").textContent = d.reactionCount === 1 ? "like" : "likes";
+      });
+
+      // Follow the site's light/dark toggle.
+      var dark = isDark();
+      new MutationObserver(function () {
+        if (isDark() === dark) return;
+        dark = isDark();
+        var frame = document.querySelector("iframe.giscus-frame");
+        if (frame) frame.contentWindow.postMessage({ giscus: { setConfig: { theme: themeUrl() } } }, "https://giscus.app");
+      }).observe(document.body, { attributes: true, attributeFilter: ["class"] });
+    }
+
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
+    else start();
+  })();
+</script>

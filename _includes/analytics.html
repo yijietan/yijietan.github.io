@@ -1,0 +1,35 @@
+<!--
+  GoatCounter: privacy-friendly analytics (page views, referrers, countries, devices). No cookies.
+  Dashboard: https://yijietan.goatcounter.com
+  Also records a "read" event when a reader reaches the end of a post (the signup box),
+  so the dashboard shows views vs. reads per post.
+-->
+<script>
+  (function () {
+    var code = "yijietan";
+    var local = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+    if (local) return;
+    var s = document.createElement("script");
+    s.async = true;
+    s.src = "https://gc.zgo.at/count.js";
+    s.setAttribute("data-goatcounter", "https://" + code + ".goatcounter.com/count");
+    document.head.appendChild(s);
+
+    document.addEventListener("DOMContentLoaded", function () {
+      var end = document.getElementById("subscribe");
+      if (!end || !location.pathname.startsWith("/posts/") || !("IntersectionObserver" in window)) return;
+      var sent = false;
+      new IntersectionObserver(function (entries, obs) {
+        if (sent || !entries.some(function (e) { return e.isIntersecting; })) return;
+        if (!window.goatcounter || !window.goatcounter.count) return;
+        sent = true;
+        obs.disconnect();
+        window.goatcounter.count({
+          path: "read:" + location.pathname,
+          title: "Read to end: " + document.title,
+          event: true
+        });
+      }).observe(end);
+    });
+  })();
+</script>

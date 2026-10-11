@@ -1,0 +1,16 @@
+/*-- scss:defaults --*/
+$body-bg: #15171a;
+$body-color: #e6e8eb;
+$primary: #4cc79a;
+$link-color: $primary;
+$navbar-bg: $body-bg;
+$navbar-fg: $body-color;
+$footer-bg: $body-bg;
+$border-color: #2d3136;
+$table-border-color: #2d3136;
+$toc-color: #9aa2ab;
+$code-bg: #1d2024;
+
+/*-- scss:rules --*/
+.subscribe-form button { color: #0d1f18; }
+#density-map .leaflet-tile-pane { filter: grayscale(1) brightness(.9); opacity: .8; }

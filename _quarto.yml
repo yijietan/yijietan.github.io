@@ -1,0 +1,50 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - "**/*.qmd"
+    - "!SITE_PLAN.md"   # private notes, never published
+  resources:
+    - "posts/*/data/*"
+    - "posts/*/*.py"
+    - "giscus/*.css"
+
+# Open .qmd files in VS Code's visual (word-processor style) editor by default.
+editor: visual
+
+website:
+  title: "Tan Yi Jie"
+  description: "Data deep dives into Singapore's buses and trains."
+  site-url: "https://yijietan.github.io"
+  open-graph: true
+  twitter-card: true
+  favicon: favicon.svg
+  navbar:
+    left:
+      - href: index.qmd
+        text: Posts
+      - href: about.qmd
+        text: About
+    right:
+      - icon: rss
+        href: index.xml
+        aria-label: RSS feed
+  page-footer:
+    center: "© Tan Yi Jie · Built with [Quarto](https://quarto.org/) · Hosted on [GitHub Pages](https://pages.github.com/) · [About this site](/about.html#about-this-site)"
+
+format:
+  html:
+    theme:
+      light: [cosmo, styles/custom.scss]
+      dark: [cosmo, styles/custom.scss, styles/dark.scss]
+    respect-user-color-scheme: true
+    grid:
+      body-width: 880px
+      margin-width: 260px
+      gutter-width: 2.5rem
+    toc: false
+    smooth-scroll: true
+    anchor-sections: true
+    link-external-newwindow: false
+    include-in-header:
+      - _includes/analytics.html

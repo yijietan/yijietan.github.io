@@ -1,0 +1,150 @@
+/*-- scss:defaults --*/
+// Light-mode values. Marked !default so styles/dark.scss can override them for dark mode.
+$font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$font-size-root: 18px !default;
+$line-height-base: 1.65 !default;
+$body-bg: #ffffff !default;
+$body-color: #1f2328 !default;
+$primary: #0b6e4f !default;
+$link-color: $primary !default;
+$navbar-bg: $body-bg !default;
+$navbar-fg: $body-color !default;
+$footer-bg: $body-bg !default;
+$border-color: #e3e5e8 !default;
+$table-border-color: #e3e5e8 !default;
+$headings-font-weight: 650 !default;
+$toc-color: #57606a !default;
+
+
+/*-- scss:rules --*/
+body { -webkit-text-size-adjust: 100%; }
+
+.navbar { border-bottom: 1px solid $border-color; box-shadow: none; }
+.navbar-title { font-weight: 650; }
+
+h1.title { font-size: 2rem; line-height: 1.25; }
+h2 { font-size: 1.4rem; margin-top: 2.2rem; border-bottom: none; }
+h3 { font-size: 1.15rem; margin-top: 1.6rem; }
+.quarto-title .subtitle { color: $toc-color; font-size: 1.1rem; }
+/* Compact title block so the TL;DR is near the top on phones. The description
+   is for search and link previews; the subtitle already says the same. */
+#title-block-header .description { display: none; }
+#title-block-header .quarto-title-meta {
+  display: flex; flex-wrap: wrap; gap: .25rem 1.5rem; margin-top: .75rem; font-size: .85rem;
+}
+#title-block-header .quarto-title-meta > div { display: flex; gap: .4rem; align-items: baseline; }
+#title-block-header .quarto-title-meta-heading { font-size: .7rem; margin: 0; color: $toc-color; }
+#title-block-header .quarto-title-meta-contents p { margin: 0; }
+#title-block-header .quarto-categories { margin-top: .5rem; }
+
+figure img, .figure img, p img { border-radius: 4px; }
+.figure-caption, figcaption { font-size: .85rem; color: $toc-color; text-align: center; }
+
+/* Tables: real HTML, compact, scroll sideways on phones instead of squashing. */
+table { font-size: .9rem; font-variant-numeric: tabular-nums; }
+.table-wrap, .cell-output-display { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+@media (max-width: 576px) {
+  main.content table { display: block; overflow-x: auto; }
+  main.content table td, main.content table th { padding: .4rem .35rem; }
+  html { font-size: 17px; }
+}
+table caption { caption-side: top; color: $toc-color; font-size: .85rem; }
+
+/* TL;DR box */
+.tldr {
+  border-left: 3px solid $primary;
+  background: rgba($primary, .06);
+  padding: .9rem 1.1rem;
+  margin: 1.25rem 0 1.75rem;
+  border-radius: 0 4px 4px 0;
+}
+.tldr > :first-child { margin-top: 0; }
+.tldr > :last-child { margin-bottom: 0; }
+.tldr-title { font-weight: 650; text-transform: uppercase; letter-spacing: .04em; font-size: .8rem; color: $primary; margin-bottom: .4rem; }
+
+.note-old { font-size: .85rem; color: $toc-color; }
+
+/* Light/dark toggle: a sun on the left and a moon on the right of the switch,
+   with the current mode's symbol highlighted. */
+.quarto-color-scheme-toggle { display: inline-flex !important; align-items: center; gap: .3rem; }
+.quarto-color-scheme-toggle::before, .quarto-color-scheme-toggle::after {
+  content: ""; display: inline-block; width: .95rem; height: .95rem;
+  background-color: currentColor; -webkit-mask: var(--icon) center / contain no-repeat; mask: var(--icon) center / contain no-repeat;
+  transition: opacity .2s;
+}
+.quarto-color-scheme-toggle::before {
+  --icon: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="3"/><g stroke="black" stroke-width="1.5" stroke-linecap="round"><path d="M8 .75v1.5M8 13.75v1.5M.75 8h1.5M13.75 8h1.5M2.9 2.9l1.06 1.06M12.04 12.04l1.06 1.06M2.9 13.1l1.06-1.06M12.04 3.96l1.06-1.06"/></g></svg>');
+}
+.quarto-color-scheme-toggle::after {
+  --icon: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M6.2 1.1a6.9 6.9 0 1 0 8.7 8.7A5.6 5.6 0 0 1 6.2 1.1z"/></svg>');
+}
+body:not(.quarto-dark) .quarto-color-scheme-toggle::after, body.quarto-dark .quarto-color-scheme-toggle::before { opacity: .35; }
+
+/* MRT/LRT line names in tables, in LTA's official line colours (same in light and dark mode). */
+.ln { font-weight: 600; white-space: nowrap; }
+.ln-nsl { color: #D42E12; }          /* North-South Line */
+.ln-ewl, .ln-cg { color: #009645; }  /* East-West Line, Changi Airport Branch */
+.ln-nel { color: #9900AA; }          /* North East Line */
+.ln-ccl, .ln-ce { color: #FA9E0D; }  /* Circle Line, Circle Line Extension */
+.ln-dtl { color: #005EC4; }          /* Downtown Line */
+.ln-tel { color: #9D5B25; }          /* Thomson-East Coast Line */
+.ln-lrt { color: #748477; }          /* Bukit Panjang, Sengkang and Punggol LRT */
+
+/* Email signup */
+.subscribe {
+  margin: 3rem 0 1rem;
+  padding: 1.25rem 1.25rem 1rem;
+  border: 1px solid $border-color;
+  border-radius: 6px;
+}
+.subscribe-title { font-weight: 650; font-size: 1.1rem; margin-bottom: .25rem; }
+.subscribe-blurb { color: $toc-color; font-size: .95rem; margin-bottom: .75rem; }
+.subscribe-form { display: flex; gap: .5rem; flex-wrap: wrap; }
+.subscribe-form input[type=email] {
+  flex: 1 1 14rem; min-width: 0; padding: .55rem .75rem; font-size: 1rem;
+  border: 1px solid $border-color; border-radius: 4px; background: transparent; color: inherit;
+}
+.subscribe-form button {
+  padding: .55rem 1.1rem; font-size: 1rem; border: 0; border-radius: 4px;
+  background: $primary; color: #fff; font-weight: 600; cursor: pointer;
+}
+.subscribe-alt { font-size: .8rem; color: $toc-color; margin: .6rem 0 0; }
+
+/* Prompt above the giscus reactions bar */
+.post-likes { margin-top: 2.5rem; }
+.reactions-prompt { text-align: center; font-weight: 650; font-size: 1.05rem; margin: 0; }
+.likes-count { text-align: center; font-size: .9rem; color: $toc-color; margin: .25rem 0 0; font-variant-numeric: tabular-nums; }
+
+/* Interactive map */
+.map-frame { height: 70vh; min-height: 360px; border: 1px solid $border-color; border-radius: 6px; margin: .5rem 0; z-index: 0; }
+.map-controls { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem 1rem; font-size: .9rem; margin-top: 1rem; }
+.map-controls input[type=range] { flex: 1 1 10rem; accent-color: $primary; }
+.map-legend { font-size: .8rem; color: $toc-color; margin-bottom: 1.5rem; }
+.map-legend-bar { height: 10px; border-radius: 2px; margin: .25rem 0; }
+.map-legend-labels { display: flex; justify-content: space-between; }
+.map-legend-labels span { width: 10%; text-align: center; }
+.map-svcs { font-variant-numeric: tabular-nums; }
+
+/* Post listing */
+div.quarto-post .body h3.listing-title, div.quarto-post .body h3.listing-title a { font-size: 1.2rem; font-weight: 700; }
+div.quarto-post .metadata { flex: 0 0 7.5rem; }
+div.quarto-post .thumbnail { flex: 0 0 200px; }
+div.quarto-post .thumbnail img, div.quarto-post .thumbnail .thumbnail-image {
+  width: 100%; object-fit: cover; border-radius: 4px; border: 1px solid $border-color;
+}
+/* Phones: image on top at full width, then title, description and date. */
+@media (max-width: 576px) {
+  div.quarto-post { flex-direction: column; gap: .5rem; }
+  div.quarto-post .thumbnail { order: -1; flex: none; width: 100%; }
+  div.quarto-post .thumbnail img, div.quarto-post .thumbnail .thumbnail-image { height: 170px !important; }
+  div.quarto-post .metadata { flex: none; padding-bottom: 0; }
+}
+div.quarto-post .body { flex: 1 1 auto; }
+.quarto-listing-default .listing-description { color: $toc-color; }
+
+/* Grey out the base map so its coloured MRT/LRT lines don't compete with the bus colours. */
+#density-map .leaflet-tile-pane { filter: grayscale(1) contrast(.85) brightness(1.05); opacity: .75; }
+
+/* Footer: let the one-line credit use the full width instead of Quarto's narrow middle column. */
+.nav-footer-center { flex: 1 1 100%; }
+.nav-footer-left:empty, .nav-footer-right:empty { display: none; }
