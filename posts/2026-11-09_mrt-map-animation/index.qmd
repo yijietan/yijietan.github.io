@@ -40,7 +40,8 @@ The data is from [LTA DataMall](https://datamall.lta.gov.sg/content/datamall/en.
   <video src="passenger_load_weekday_combined_hires.mp4" poster="thumbnail.jpg" controls muted playsinline preload="metadata" style="width:100%"></video>
 </div>
 <style>
-.scrub { margin: .5rem 0 1.5rem; }
+/* Shrink the whole player on short screens (e.g. phones in landscape) so the video and its controls fit on screen together. The videos are 3:2. */
+.scrub { margin: .5rem auto 1.5rem; max-width: max(280px, calc((100vh - 9.5rem) * 1.5)); max-width: max(280px, calc((100svh - 9.5rem) * 1.5)); }
 .scrub video { display: block; width: 100%; height: auto; background: #fff; border: 1px solid var(--bs-border-color, #dee2e6); border-radius: 6px; }
 .scrub-controls { display: flex; align-items: flex-start; gap: .5rem; margin-top: .5rem; }
 .scrub button { flex: 0 0 auto; min-width: 2.25rem; height: 2rem; padding: 0 .5rem; border: 1px solid var(--bs-border-color, #dee2e6); border-radius: 4px; background: transparent; color: inherit; line-height: 1; font-size: 1rem; }
@@ -50,6 +51,12 @@ The data is from [LTA DataMall](https://datamall.lta.gov.sg/content/datamall/en.
 .scrub-ticks { position: relative; height: 1.1rem; font-size: .75rem; opacity: .7; }
 .scrub-ticks span { position: absolute; top: 0; transform: translateX(-50%); white-space: nowrap; }
 .scrub-note { font-size: .8rem; opacity: .7; min-height: 1.1rem; text-align: center; }
+/* On narrow screens, give the slider its own full-width row, with bigger buttons underneath. */
+@media (max-width: 575px) {
+  .scrub-controls { flex-wrap: wrap; }
+  .scrub-track { order: -1; flex-basis: 100%; }
+  .scrub button { flex: 1 1 0; height: 2.5rem; }
+}
 </style>
 <script>
 (function () {
@@ -124,6 +131,18 @@ The data is from [LTA DataMall](https://datamall.lta.gov.sg/content/datamall/en.
       }).catch(function () { whole = true; note.textContent = "Scrubbing isn't available here, but you can still press play."; });
     }
 
+    // Hide any hour label that would overlap the one before it (the slider is short on phones).
+    function fitTicks() {
+      var prev = -Infinity;
+      Array.prototype.forEach.call(ticks.children, function (s) {
+        s.style.visibility = "";
+        var b = s.getBoundingClientRect();
+        if (b.left < prev + 6) s.style.visibility = "hidden"; else prev = b.right;
+      });
+    }
+    if (window.ResizeObserver) new ResizeObserver(fitTicks).observe(ticks);
+    else window.addEventListener("resize", fitTicks);
+
     v.addEventListener("loadedmetadata", function () {
       last = Math.round(v.duration * FPS) - 1;
       r.max = last;
@@ -136,6 +155,7 @@ The data is from [LTA DataMall](https://datamall.lta.gov.sg/content/datamall/en.
         s.style.left = "calc(8px + (100% - 16px) * " + frac + ")";   // line up with the slider thumb
         ticks.appendChild(s);
       });
+      fitTicks();
       seeking = 0;
       seek(started ? +r.value : Math.round(parseFloat(box.dataset.start || "0") * FPS));
       started = true;
