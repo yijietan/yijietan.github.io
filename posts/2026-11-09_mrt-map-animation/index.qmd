@@ -211,7 +211,7 @@ For the LRT lines, they stay deep blue all day, like capillaries next to the art
 
 For weekends and public holidays, the passenger loads are more constant throughout the day. There's no sudden burst of red, just a steady green and cyan throughout most of the day. If you look carefully, you'll find two gentle humps, at around 9.30am and 9.30pm, but even then the busiest segment only reaches about 11k passengers per hour, a third of the weekday peak.
 
-An interesting comparison: scrub both weekday and weekend/PH videos to **2pm** and compare. The weekend afternoons are actually busier with almost 90% of all segments carrying more passengers than on a weekday afternoon. I think this explains why trains on Saturday afternoon can sometimes feel rather crowded.
+One interesting comparison: scrub both weekday and weekend/PH videos to **2pm**. The weekend afternoons are actually busier with almost 90% of all segments carrying more passengers than on a weekday afternoon. I think this explains why trains on Saturday afternoon can sometimes feel rather crowded.
 
 ## Insights
 
