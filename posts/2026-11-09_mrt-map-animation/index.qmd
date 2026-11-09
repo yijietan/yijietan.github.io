@@ -18,6 +18,8 @@ editor: source   # the timelapse player code below is easier to keep intact in s
 - Weekends have no rush hour, and never get past about a third of the weekday peak. But weekend afternoons are busier than weekday afternoons.
 :::
 
+Also posted on [Medium](https://medium.com/@simpletan/mrt-and-lrt-passenger-volume-heat-map-timelapse-august-2026-25ba0770b86f).
+
 I'm back with another look at Singapore's rail network! In my [previous article](/posts/2026-01-18_busiest-mrt-stations/), I went through the busiest stations and line segments, presenting the data in tables. This time, I've converted the passenger loads data from table format into a heatmap with a timelapse instead, so you can see how the crowd actually moves over the day.
 
 How to read it:
