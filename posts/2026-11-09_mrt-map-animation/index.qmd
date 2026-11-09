@@ -25,7 +25,7 @@ How to read it:
 - **Color:** the busier the track segment, the "hotter" and redder it looks. Quieter segments look bluer. The loads are passengers per hour, averaged over August 2026.
 - **Arrows:** each line has two directions, so you can see which way the crowd is heading.
 - **Zoomed-in box:** the central region, with the interchanges labelled. Without it, the city centre pretty much looks like a lump of colours.
-- **Speed:** 1200× real time for most of the day, slowing down to 240× from 7am to 9.30am and from 5pm to 8pm, so you can actually see the rush hours build up.
+- **Speed:** 1200x real time for most of the day, slowing down to 240x from 7am to 9.30am and from 5pm to 8pm, so you can actually see the rush hours build up.
 
 Press play to watch the whole day, or drag the slider to scrub through it. You can also click on the slider and use the arrow keys to step one frame at a time.
 
