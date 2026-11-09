@@ -31,6 +31,11 @@ Press play to watch the whole day, or drag the slider to scrub through it. You c
 
 The data is from [LTA DataMall](https://datamall.lta.gov.sg/content/datamall/en.html), and the passenger loads are estimated the same way as before. The details are in the [appendix](/posts/2026-01-18_mrt-passenger-load-method/). There are two videos, one for weekdays, and one for weekends and public holidays.
 
+If you'd rather watch them offline, you can download them here:
+
+- [Weekday video](passenger_load_weekday_combined_hires.mp4){download="mrt-lrt-timelapse-weekday-aug-2026.mp4"} (MP4, 69 MB)
+- [Weekend and public holiday video](passenger_load_weekend_ph_combined.mp4){download="mrt-lrt-timelapse-weekend-ph-aug-2026.mp4"} (MP4, 36 MB)
+
 ## Weekdays
 
 ```{=html}
@@ -188,7 +193,7 @@ The data is from [LTA DataMall](https://datamall.lta.gov.sg/content/datamall/en.
 </script>
 ```
 
-Some times worth scrubbing to:
+Some timestamps worth looking at:
 
 - **6am to 7am:** we can see how quickly the lines start to get really busy. Kovan to Serangoon goes from about 12k to 23k passengers per hour (an increase of \~11k passengers) in just 40 minutes.
 - **7.30am:** the height of the AM peak. Three corridors are bright red, all in the city-bound direction: the [NEL]{.ln .ln-nel} from Punggol and Sengkang, the [EWL]{.ln .ln-ewl} from Jurong East to Buona Vista, and the [NSL]{.ln .ln-nsl} from Khatib to Bishan. Kovan to Serangoon is the busiest segment as per the previous article, at 31k passengers.
