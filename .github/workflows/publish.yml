@@ -19,6 +19,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # Videos are stored with Git LFS. Fetch them from a cache, so the build only uses the
+      # free 1 GB/month LFS download allowance when a video is added or changed.
+      - name: List LFS files
+        run: git lfs ls-files --long | cut -d ' ' -f1 | sort > .lfs-ids
+      - uses: actions/cache@v4
+        with:
+          path: .git/lfs
+          key: lfs-${{ hashFiles('.lfs-ids') }}
+          restore-keys: lfs-
+      - name: Fetch LFS files
+        run: git lfs pull
       - uses: quarto-dev/quarto-actions/setup@v2
       - run: quarto render
       - uses: actions/upload-pages-artifact@v3

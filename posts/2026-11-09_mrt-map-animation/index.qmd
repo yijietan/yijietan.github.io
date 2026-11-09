@@ -1,0 +1,202 @@
+---
+title: "MRT and LRT passenger volume heat map timelapse (August 2026)"
+subtitle: "A day in the life of Singapore's rail network, sped up and visualised as a heat map."
+description: "Timelapse heat map of passenger loads on Singapore's MRT and LRT network over a weekday and a weekend, built from LTA DataMall data for August 2026."
+date: 2026-11-09
+categories: [maps, trains]
+image: thumbnail.jpg
+resources:
+  - "*.mp4"
+editor: source   # the timelapse player code below is easier to keep intact in source mode
+---
+
+::: {.tldr}
+[TL;DR]{.tldr-title}
+
+- On weekdays, the crowd flows into the city along three corridors in the morning, and back out along the same ones in the evening: the North East Line, the East-West Line in the west, and the North-South Line in the north.
+- The AM peak is short and sharp, topping out at about 31,000 passengers per hour on Kovan to Serangoon at 7.30am. The PM peak builds up more slowly and lingers well into the night.
+- Weekends have no rush hour, and never get past about a third of the weekday peak. But weekend afternoons are busier than weekday afternoons.
+:::
+
+I'm back with another look at Singapore's rail network! In my [previous article](/posts/2026-01-18_busiest-mrt-stations/), I went through the busiest stations and line segments, presenting the data in tables. This time, I've converted the passenger loads data from table format into a heatmap with a timelapse instead, so you can see how the crowd actually moves over the day.
+
+How to read it:
+
+- **Color:** the busier the track segment, the "hotter" and redder it looks. Quieter segments look bluer. The loads are passengers per hour, averaged over August 2026.
+- **Arrows:** each line has two directions, so you can see which way the crowd is heading.
+- **Zoomed-in box:** the central region, with the interchanges labelled. Without it, the city centre pretty much looks like a lump of colours.
+- **Speed:** 1200× real time for most of the day, slowing down to 240× from 7am to 9.30am and from 5pm to 8pm, so you can actually see the rush hours build up.
+
+Press play to watch the whole day, or drag the slider to scrub through it. You can also click on the slider and use the arrow keys to step one frame at a time.
+
+The data is from [LTA DataMall](https://datamall.lta.gov.sg/content/datamall/en.html), and the passenger loads are estimated the same way as before. The details are in the [appendix](/posts/2026-01-18_mrt-passenger-load-method/). There are two videos, one for weekdays, and one for weekends and public holidays.
+
+## Weekdays
+
+```{=html}
+<div class="scrub" data-src="passenger_load_weekday_combined_hires.mp4" data-poster="thumbnail.jpg" data-start="30.0"
+     data-name="Weekday timelapse of MRT and LRT passenger loads">
+  <!-- Plain video, shown until the script below swaps in the scrubbing player (and in the composer's quick preview). -->
+  <video src="passenger_load_weekday_combined_hires.mp4" poster="thumbnail.jpg" controls muted playsinline preload="metadata" style="width:100%"></video>
+</div>
+<style>
+.scrub { margin: .5rem 0 1.5rem; }
+.scrub video { display: block; width: 100%; height: auto; background: #fff; border: 1px solid var(--bs-border-color, #dee2e6); border-radius: 6px; }
+.scrub-controls { display: flex; align-items: flex-start; gap: .5rem; margin-top: .5rem; }
+.scrub button { flex: 0 0 auto; min-width: 2.25rem; height: 2rem; padding: 0 .5rem; border: 1px solid var(--bs-border-color, #dee2e6); border-radius: 4px; background: transparent; color: inherit; line-height: 1; font-size: 1rem; }
+.scrub button:hover { background: rgba(127,127,127,.12); }
+.scrub-track { flex: 1 1 auto; min-width: 0; }
+.scrub-track input[type=range] { width: 100%; display: block; margin: 0; }
+.scrub-ticks { position: relative; height: 1.1rem; font-size: .75rem; opacity: .7; }
+.scrub-ticks span { position: absolute; top: 0; transform: translateX(-50%); white-space: nowrap; }
+.scrub-note { font-size: .8rem; opacity: .7; min-height: 1.1rem; text-align: center; }
+</style>
+<script>
+(function () {
+  var FPS = 10;
+  // Clock time (minutes after midnight) for a video time in seconds. Both videos start at 5am,
+  // run at 1200x (20 min per second) off-peak and 240x (4 min per second) from 7-9.30am and 5-8pm.
+  var SEGS = [[0, 300, 20], [6.1, 420, 4], [43.6, 570, 20], [66.1, 1020, 4], [111.1, 1200, 20]];
+  function clockAt(t) {
+    var s = SEGS[0];
+    for (var i = 0; i < SEGS.length; i++) if (t >= SEGS[i][0]) s = SEGS[i];
+    return s[1] + (t - s[0]) * s[2];
+  }
+  function timeFor(min) {
+    for (var i = SEGS.length - 1; i >= 0; i--) if (min >= SEGS[i][1]) return SEGS[i][0] + (min - SEGS[i][1]) / SEGS[i][2];
+    return 0;
+  }
+  function fmt(min) {
+    min = Math.round(min) % 1440;
+    var h = Math.floor(min / 60), m = min % 60, ap = h < 12 ? "am" : "pm", h12 = h % 12 || 12;
+    return h12 + (m ? "." + (m < 10 ? "0" : "") + m : "") + ap;
+  }
+
+  function setup(box) {
+    box.innerHTML =
+      '<video muted playsinline preload="metadata"></video>' +
+      '<div class="scrub-controls">' +
+        '<button type="button" class="scrub-play" aria-label="Play">&#9654;&#xFE0E;</button>' +
+        '<button type="button" class="scrub-prev" aria-label="Previous frame">&#8249;</button>' +
+        '<div class="scrub-track"><input type="range" min="0" max="1259" step="1" value="0"><div class="scrub-ticks" aria-hidden="true"></div></div>' +
+        '<button type="button" class="scrub-next" aria-label="Next frame">&#8250;</button>' +
+      '</div>' +
+      '<div class="scrub-note" aria-live="polite"></div>';
+    var v = box.querySelector("video"), r = box.querySelector("input"),
+        play = box.querySelector(".scrub-play"), ticks = box.querySelector(".scrub-ticks");
+    r.setAttribute("aria-label", box.dataset.name + ": time of day");
+    v.setAttribute("aria-label", box.dataset.name);
+    if (box.dataset.poster) v.poster = box.dataset.poster;
+    v.src = box.dataset.src;
+
+    var last = 1259, want = null, seeking = 0, target = 0, started = false, whole = false,
+        note = box.querySelector(".scrub-note");
+    function label(f) { r.setAttribute("aria-valuetext", fmt(clockAt(f / FPS))); }
+    function go() {
+      if (want === null || whole === "loading") return;
+      var f = want; want = null; seeking = Date.now();
+      target = (f + 0.5) / FPS;   // middle of the frame, so the browser lands on the right one
+      v.currentTime = target;
+    }
+    // While a seek is in progress, only remember the latest position, so dragging stays smooth.
+    // Don't wait more than 300 ms though, in case the browser never reports the seek as done.
+    var retry = null;
+    function seek(f) {
+      f = Math.max(0, Math.min(last, f)); r.value = f; label(f); want = f;
+      if (!seeking || Date.now() - seeking > 300) go();
+      clearTimeout(retry);
+      retry = setTimeout(function () { if (want !== null) go(); }, 320);   // apply the last position after dragging stops
+    }
+    v.addEventListener("seeked", function () {
+      seeking = 0;
+      // Some servers (like Quarto's local preview) can't send part of a file, so the browser can't
+      // jump ahead. If a seek doesn't land, download the whole video once and scrub from that copy.
+      if (!whole && Math.abs(v.currentTime - target) > 0.25) { loadWhole(); return; }
+      go();
+    });
+    function loadWhole() {
+      whole = "loading";
+      if (want === null) want = +r.value;
+      note.textContent = "Loading the video so you can scrub through it…";
+      fetch(box.dataset.src).then(function (res) { return res.blob(); }).then(function (b) {
+        whole = true; note.textContent = "";
+        v.src = URL.createObjectURL(b);   // loadedmetadata below then seeks to the slider's position
+      }).catch(function () { whole = true; note.textContent = "Scrubbing isn't available here, but you can still press play."; });
+    }
+
+    v.addEventListener("loadedmetadata", function () {
+      last = Math.round(v.duration * FPS) - 1;
+      r.max = last;
+      ticks.innerHTML = "";
+      [360, 540, 720, 900, 1080, 1260, 1440].forEach(function (min) {
+        var frac = timeFor(min) / v.duration;
+        if (frac > 1) return;
+        var s = document.createElement("span");
+        s.textContent = fmt(min);
+        s.style.left = "calc(8px + (100% - 16px) * " + frac + ")";   // line up with the slider thumb
+        ticks.appendChild(s);
+      });
+      seeking = 0;
+      seek(started ? +r.value : Math.round(parseFloat(box.dataset.start || "0") * FPS));
+      started = true;
+    });
+
+    function step() {
+      if (v.paused) return;
+      var f = Math.min(last, Math.floor(v.currentTime * FPS));
+      r.value = f; label(f);
+      requestAnimationFrame(step);
+    }
+    function setPlaying(p) {
+      play.innerHTML = p ? "&#10074;&#10074;" : "&#9654;&#xFE0E;";
+      play.setAttribute("aria-label", p ? "Pause" : "Play");
+    }
+    v.addEventListener("play", function () { setPlaying(true); requestAnimationFrame(step); });
+    v.addEventListener("pause", function () { setPlaying(false); });
+    v.addEventListener("ended", function () { setPlaying(false); });
+    play.addEventListener("click", function () {
+      if (v.paused) { if (+r.value >= last) v.currentTime = 0; v.play(); } else v.pause();
+    });
+    r.addEventListener("input", function () { v.pause(); seek(+r.value); });
+    box.querySelector(".scrub-prev").addEventListener("click", function () { v.pause(); seek(+r.value - 1); });
+    box.querySelector(".scrub-next").addEventListener("click", function () { v.pause(); seek(+r.value + 1); });
+  }
+
+  function init() { document.querySelectorAll(".scrub:not([data-ready])").forEach(function (b) { b.dataset.ready = 1; setup(b); }); }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
+})();
+</script>
+```
+
+Some times worth scrubbing to:
+
+- **6am to 7am:** we can see how quickly the lines start to get really busy. Kovan to Serangoon goes from about 12k to 23k passengers per hour (an increase of \~11k passengers) in just 40 minutes.
+- **7.30am:** the height of the AM peak. Three corridors are bright red, all in the city-bound direction: the [NEL]{.ln .ln-nel} from Punggol and Sengkang, the [EWL]{.ln .ln-ewl} from Jurong East to Buona Vista, and the [NSL]{.ln .ln-nsl} from Khatib to Bishan. Kovan to Serangoon is the busiest segment as per the previous article, at 31k passengers.
+- **12pm to 3pm:** everything sort of cools down. Even the busiest segment only carries about 5000 to 7000 passengers per hour, a fifth of the AM peak.
+- **4.30pm to 6.30pm:** the PM peak builds up more slowly. It takes two hours to reach its peak of about 29k at 6.30pm, compared to one hour in the morning. The outbound direction from the city area is red now.
+- **8pm to 9.30pm:** the evening lingers. Little India to Farrer Park is still at about 14k passengers per hour at 8pm, and about 11k at 9.30pm, which is almost double the midday peak.
+
+Other than that, the evening is pretty much the inverse of the morning situation. The city centre is a little busier in the evening (City Hall to Raffles Place is up 23%, and Somerset to Dhoby Ghaut on Orchard Road is up 14%), probably from the concentration of the after-work dinner and shopping crowd. The [NSL]{.ln .ln-nsl} in the north and west is busier in the morning, by up to 21%, since everyone from there is squeezed into the same hour in the morning peak.
+
+For the LRT lines, they stay deep blue all day, like capillaries next to the arteries. Even the busiest LRT segment only carries about 3k passengers per hour at the peak.
+
+## Weekends and public holidays
+
+```{=html}
+<div class="scrub" data-src="passenger_load_weekend_ph_combined.mp4" data-poster="weekend-poster.jpg" data-start="81.1"
+     data-name="Weekend and public holiday timelapse of MRT and LRT passenger loads">
+  <video src="passenger_load_weekend_ph_combined.mp4" poster="weekend-poster.jpg" controls muted playsinline preload="metadata" style="width:100%"></video>
+</div>
+```
+
+For weekends and public holidays, the passenger loads are more constant throughout the day. There's no sudden burst of red, just a steady green and cyan throughout most of the day. If you look carefully, you'll find two gentle humps, at around 9.30am and 9.30pm, but even then the busiest segment only reaches about 11k passengers per hour, a third of the weekday peak.
+
+An intereting comparison: scrub both weekday and weekend/PH videos to **2pm** and compare. The weekend afternoons are actually busier with almost 90% of all segments carrying more passengers than on a weekday afternoon. I think this explains why trains on Saturday afternoon can sometimes feel rather crowded.
+
+## Insights
+
+In my previous article's [bus density map](/posts/2026-03-02_bus-density-map/), I interpreted the bus network as a circulatory system. The rail network fits the same picture, except that this time we can actually watch it pump passengers throughout the network over the day. The city centre is the heart, the [NEL]{.ln .ln-nel}, [NSL]{.ln .ln-nsl} and [EWL]{.ln .ln-ewl} are the main arteries, and the LRT loops are the capillaries, quietly feeding passengers in from the estates. The [CCL]{.ln .ln-ccl}, [DTL]{.ln .ln-dtl} and [TEL]{.ln .ln-tel} are the smaller blood vessels that branch off and link the main arteries together. They carry less of the flow, but they let passengers move between the arteries and reach places the arteries don't, without always having to pass through the heart. The [CCL ]{.ln .ln-ccl}in particular is a bit like a bypass, looping around the city centre.
+
+On weekdays, you can see the heartbeat. In the morning, the crowd gets pumped into the city through the arteries in one hard, fast beat. It eases off over the afternoon, and then flows back out through the very same arteries in the evening, in a longer and gentler beat. The weekend is more like a resting pulse, steady all day with no single moment where everyone is moving at once.
+
+It'll be interesting to see how this picture changes once the Cross Island Line and Jurong Region Line open, giving the network a few more arteries, and hopefully taking some of the pressure off the current ones.
