@@ -7,6 +7,7 @@ categories: [maps, trains]
 image: thumbnail.jpg
 resources:
   - "*.mp4"
+  - "*.jpg"
 editor: source   # the timelapse player code below is easier to keep intact in source mode
 ---
 
@@ -227,3 +228,42 @@ In my previous article's [bus density map](/posts/2026-03-02_bus-density-map/),
 On weekdays, you can see the heartbeat. In the morning, the crowd gets pumped into the city through the arteries in one hard, fast beat. It eases off over the afternoon, and then flows back out through the very same arteries in the evening, in a longer and gentler beat. The weekend is more like a resting pulse, steady all day with no single moment where everyone is moving at once.
 
 It'll be interesting to see how this picture changes once the Cross Island Line and Jurong Region Line open, giving the network a few more arteries, and hopefully taking some of the pressure off the current ones.
+
+## Addendum: the same videos on a log scale
+
+Some readers pointed out that the quieter lines are hard to read in the videos above. They use a square-root colour scale, which leaves most of the colours for the busy end. Anything under about 5k passengers per hour gets squeezed into the bottom 40% of the colour bar, so most of the [CCL]{.ln .ln-ccl}, [DTL]{.ln .ln-dtl}, [TEL]{.ln .ln-tel} and the LRT lines end up in similar shades of blue and cyan.
+
+So here are the same two videos on a log scale, from 100 to 30k passengers per hour. Each label on the colour bar is about three times the one before it (300, 1k, 3k, 10k, 30k), so each tripling of the crowd moves a line the same distance along the colour bar, whether it's a quiet line or a busy one.
+
+If you'd like these offline too:
+
+- [Weekday video, log scale](passenger_load_weekday_combined_hires_log.mp4){download="mrt-lrt-timelapse-weekday-aug-2026-log.mp4"} (MP4, 67 MB)
+- [Weekend and public holiday video, log scale](passenger_load_weekend_ph_combined_hires_log.mp4){download="mrt-lrt-timelapse-weekend-ph-aug-2026-log.mp4"} (MP4, 63 MB)
+
+### Weekdays (log scale)
+
+```{=html}
+<div class="scrub" data-src="passenger_load_weekday_combined_hires_log.mp4" data-poster="weekday-log-poster.jpg" data-start="30.0"
+     data-name="Weekday timelapse of MRT and LRT passenger loads, log scale">
+  <video src="passenger_load_weekday_combined_hires_log.mp4" poster="weekday-log-poster.jpg" controls muted playsinline preload="metadata" style="width:100%"></video>
+</div>
+```
+
+### Weekends and public holidays (log scale)
+
+```{=html}
+<div class="scrub" data-src="passenger_load_weekend_ph_combined_hires_log.mp4" data-poster="weekend-log-poster.jpg" data-start="81.1"
+     data-name="Weekend and public holiday timelapse of MRT and LRT passenger loads, log scale">
+  <video src="passenger_load_weekend_ph_combined_hires_log.mp4" poster="weekend-log-poster.jpg" controls muted playsinline preload="metadata" style="width:100%"></video>
+</div>
+```
+
+What the log scale shows better:
+
+- **The smaller blood vessels:** at 7.30am on a weekday, the [CCL]{.ln .ln-ccl}, [DTL]{.ln .ln-dtl} and [TEL]{.ln .ln-tel} are mostly yellow to orange rather than cyan. They carry a lot of passengers too, just not as many as the main arteries.
+- **The quiet ends:** the far ends of the lines, like Tuas on the [EWL]{.ln .ln-ewl} and the eastern end of the [TEL]{.ln .ln-tel}, stand out from the rest of their line. The LRT loops stay mostly blue, so even here they really are the quietest part of the network.
+- **The weekend afternoon:** look at both log-scale videos at **2pm** again. On the weekday, most of the network is green and yellow. On the weekend, it's yellow and orange, so the difference from earlier is visible across the whole network, not just on the busiest lines.
+
+The catch is at the busy end. On the log scale, everything from 10k to 30k passengers per hour fits into the top fifth of the colour bar, so at the peaks the [NEL]{.ln .ln-nel}, [NSL]{.ln .ln-nsl} and [EWL]{.ln .ln-ewl} all look about the same shade of orange-red, and it's much harder to see that the [NEL]{.ln .ln-nel} is the busiest. That's why I kept the square-root scale for the main videos: it's better for comparing the busiest corridors, while the log scale is better for everything else.
+
+Also, another thing to note is that neither scale shows how full the trains are. The colors show passengers per hour, not passengers per train, and LRT trains are much smaller than MRT trains. A packed LRT train can still look blue next to a half-full [NSL]{.ln .ln-nsl} train.
